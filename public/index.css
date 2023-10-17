@@ -1,0 +1,21 @@
+h1 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* center page contents */
+.page-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* limit image widths to 500px */
+.cat-img-div {
+    width: 500px;
+}
+
+/* ensure cat image stays within 500px limit of outer div */
+#cat-image {
+    width: 100%;
+    height: auto;
+}
