@@ -20,25 +20,35 @@ window.onload = () => {
         // update score count in html to 0
         const voteScoreCount = document.querySelector('#score-count');
         voteScoreCount.innerText = ('0');
-        // update score count in session memory to 0
-        sessionStorage.setItem("score-count", 0);
+        // update score count in local memory to 0
+        localStorage.setItem("score-count", 0);
+
+        // clear comments
+        const commentDisplayBox = document.querySelector('#comment-display-box');
+        commentDisplayBox.innerHTML = ('');   
+        // clear comments in local memory
+        localStorage.setItem('comments', '');
+
+        // clear comment box
+        const commentInputField = document.querySelector('#comment-input');
+        commentInputField.value = ('');
     };
 
     // upvote button listener function
     const upvoteButtonListener = () => {
         const voteScoreCount = document.querySelector('#score-count');
-        let count = sessionStorage.getItem('score-count');
+        let count = localStorage.getItem('score-count');
         count++;
-        sessionStorage.setItem('score-count', count);
+        localStorage.setItem('score-count', count);
         voteScoreCount.innerText = (count);
     };
 
     // downvote button listener function
     const downvoteButtonListener = () => {
         const voteScoreCount = document.querySelector('#score-count');
-        let count = sessionStorage.getItem('score-count');
+        let count = localStorage.getItem('score-count');
         count--;
-        sessionStorage.setItem('score-count', count);
+        localStorage.setItem('score-count', count);
         voteScoreCount.innerText = (count);
     };
 
@@ -52,6 +62,10 @@ window.onload = () => {
     // comment submit listener function
     const commentSubmitListener = () => {
         createComment(inputField);
+        // save all comments in local memory
+        const commentBox = document.querySelector('#comment-display-box');
+        let allComments = commentBox.innerHTML;
+        localStorage.setItem('comments', allComments);
     };
 
     /* --------------------------------------------- */

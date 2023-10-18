@@ -87,6 +87,33 @@ export const createMainContent = () => {
     /* ---------- HTML Element Construction ---------- */
     /* ----------------------------------------------- */
 
+    // Reload all content from local memory if page has been previously visited
+
+    // Reload last cat url if one exists
+    let existingCat = localStorage.getItem('cat-url');
+    if (existingCat) {
+        catImage.src = (existingCat);
+    }
+    else {
+        // otherwise, fetch and store new image
+        // this will only run the very first time the site is visited
+        getNewCat(catImage);
+    }
+ 
+    // Reload upvote score if one exists
+    let count = localStorage.getItem('score-count');
+    if (count) {
+        voteScoreCount.innerText = (count);
+    }
+
+    // Reload all comments if any exists
+    let comments = localStorage.getItem('comments');
+    if (comments) {
+        commentDisplayBox.innerHTML = (comments);
+    }
+
+    // Append all HTML elements
+
     // append top level div
     document.body.appendChild(pageBody);
 
@@ -97,7 +124,6 @@ export const createMainContent = () => {
     pageBody.appendChild(imgDiv);
 
     // append cat image
-    getNewCat(catImage);
     imgDiv.appendChild(catImage);
 
     // append new cat button
@@ -152,6 +178,8 @@ export const getNewCat = (catImage) => {
         })
         .then (dataObject => {
             catImage.src = (dataObject.url);
+            // save url in local memory
+            localStorage.setItem('cat-url', dataObject.url);
         });
     }
     catch (error) {
@@ -166,18 +194,21 @@ export const createComment = (inputField) => {
     if (inputField !== undefined) {
         const commentBox = document.querySelector('#comment-display-box');
 
+        // get date and time
         let dateTime = new Date();
         dateTime = dateTime.toLocaleString();
 
-
+        // append date and time to comment
         const date = document.createElement('p');
         date.innerText = (`- - - ${dateTime} - - -`);
         commentBox.appendChild(date);
 
+        // get text field input and append to comment
         const comment = document.createElement('p');
         comment.innerText = (`${inputField}`);
         commentBox.appendChild(comment);
 
+        // clear text field of all values
         const commentInputField = document.querySelector('#comment-input');
         commentInputField.value = ('');
     }
