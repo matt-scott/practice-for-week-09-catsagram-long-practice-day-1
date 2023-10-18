@@ -1,24 +1,16 @@
-import { createMainContent, getNewCat } from './main.js';
-
-// create outer div for centering all page content
-const createPageLayout = () => {
-    const pageBody = document.createElement('div');
-    pageBody.className = ('page-body');
-    document.body.appendChild(pageBody);
-    return pageBody;
-};
-
+import { createMainContent, getNewCat, createComment } from './main.js';
 
 window.onload = () => {
-/* ----------------------------------------------- */
-/* ---------- HTML Content Construction ---------- */
-/* ----------------------------------------------- */
-
-    // create outer div
-    const pageBody = createPageLayout();
+    /* ----------------------------------------------- */
+    /* ---------- HTML Content Construction ---------- */
+    /* ----------------------------------------------- */
 
     // create inner content, with reference to outer div
-    createMainContent(pageBody);
+    createMainContent();
+
+    /* ---------------------------------------------- */
+    /* ---------- Event Listener Functions ---------- */
+    /* ---------------------------------------------- */
 
     // new cat listener function
     const newCatButtonListener = () => {
@@ -31,10 +23,6 @@ window.onload = () => {
         // update score count in session memory to 0
         sessionStorage.setItem("score-count", 0);
     };
-
-/* ---------------------------------------------- */
-/* ---------- Event Listener Functions ---------- */
-/* ---------------------------------------------- */
 
     // upvote button listener function
     const upvoteButtonListener = () => {
@@ -54,9 +42,21 @@ window.onload = () => {
         voteScoreCount.innerText = (count);
     };
 
-/* --------------------------------------------- */
-/* ---------- Event Listener Creation ---------- */
-/* --------------------------------------------- */
+    // comment input field save function
+    let inputField;
+    const commentInputFieldListener = (event) => {
+        inputField = event.target.value;
+    };
+
+
+    // comment submit listener function
+    const commentSubmitListener = () => {
+        createComment(inputField);
+    };
+
+    /* --------------------------------------------- */
+    /* ---------- Event Listener Creation ---------- */
+    /* --------------------------------------------- */
 
     // create listener for new cat button click
     const newCatButton = document.querySelector('#new-cat-button');
@@ -70,6 +70,13 @@ window.onload = () => {
     const downvoteButton = document.querySelector('#downvote-button');
     downvoteButton.addEventListener("click", downvoteButtonListener);
 
+    // create listener to save text in comment input field
+    const commentInputField = document.querySelector('#comment-input');
+    commentInputField.addEventListener("input", commentInputFieldListener);
+
+    // create listener for comment submit button
+    const commentSubmitButton = document.querySelector('#comment-submit-button');
+    commentSubmitButton.addEventListener("click", commentSubmitListener);
 };
 
 
