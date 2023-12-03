@@ -1,0 +1,21 @@
+{
+  "name": "practice-for-week-09-catsagram-long-practice-day-1",
+  "version": "1.0.0",
+  "description": "In this practice, you'll be building a multi-day project called Catstagram!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matt-scott/practice-for-week-09-catsagram-long-practice-day-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matt-scott/practice-for-week-09-catsagram-long-practice-day-1/issues"
+  },
+  "homepage": "https://github.com/matt-scott/practice-for-week-09-catsagram-long-practice-day-1#readme"
+}
